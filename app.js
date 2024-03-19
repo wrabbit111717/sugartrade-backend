@@ -21,7 +21,7 @@ const { getMessage, saveMessage } = require('./controllers/MessageController');
 const fileURLToPath = require('url');
 // var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 
-var port = 80;
+var port = 8080;
 
 // var credentials = {key: privateKey, cert: certificate};
 
@@ -47,8 +47,8 @@ var app = express();
 const httpServer = http.createServer(app);
 const io = socketIo(httpServer, {
   cors: {
-    // origin: 'http://localhost:3000', // Update with your Next.js client URL
-    origin: 'http://sugartrader.com.br', // Update with your Next.js client URL
+    origin: 'http://sugartrade.com.br', // Update with your Next.js client URL
+    // origin: 'http://sugartrader.com.br', // Update with your Next.js client URL
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'], // Add necessary headers for chat and file upload
     credentials: true
@@ -152,8 +152,7 @@ io.on('connection', (socket) => {
 
 
 var corsOptions = {
-  origin: "http://sugartrader.com.br",
-  // origin: "http://localhost:3000",
+  origin: "http://sugartrade.com.br",
   methods: "POST, GET, PUT, DELETE",
 };
 app.use(cors(corsOptions));
