@@ -134,7 +134,7 @@ exports.signup = async function (req, res, next) {
 };
 
 function sendVerificationEmail(email, verificationToken) {
-    // const verificationLink = `http://sugartrade.com.br/auth/verifyEmail/${token}`; // Update with your actual domain and endpoint
+    // const verificationLink = `http://sugartrader.com.br/auth/verifyEmail/${token}`; // Update with your actual domain and endpoint
     // const mailOptions = {
     //     from: 'twinklex2025@gmail.com',
     //     to: email,

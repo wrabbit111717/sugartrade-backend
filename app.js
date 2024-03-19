@@ -48,7 +48,7 @@ const httpServer = http.createServer(app);
 const io = socketIo(httpServer, {
   cors: {
     // origin: 'http://localhost:3000', // Update with your Next.js client URL
-    origin: 'http://sugartrade.com.br', // Update with your Next.js client URL
+    origin: 'http://sugartrader.com.br', // Update with your Next.js client URL
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'], // Add necessary headers for chat and file upload
     credentials: true
@@ -152,7 +152,7 @@ io.on('connection', (socket) => {
 
 
 var corsOptions = {
-  origin: "http://sugartrade.com.br",
+  origin: "http://sugartrader.com.br",
   // origin: "http://localhost:3000",
   methods: "POST, GET, PUT, DELETE",
 };
