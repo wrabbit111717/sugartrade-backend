@@ -6,7 +6,7 @@ exports.getOffers = async function(req, res, next) {
     const {type, user_id} = req.body;
     console.log(user_id, 'user_id')
     try {
-        Offer.find({type : type, is_active: true, user_id: { $ne: user_id }}, (err, offers) => {
+        Offer.find({type : type, is_active: true}, (err, offers) => {
             res.json({offers : offers});
         });    
     } catch (err) {

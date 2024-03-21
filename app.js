@@ -101,6 +101,7 @@ io.on('connection', (socket) => {
 
   socket.on('chat message', async ({ room, fileData, fileName, message, senderId }) => {
     console.log(senderId, 'senderId')
+    var negotiationStatus = false;
     if(fileData) {
       console.log('fileData')
 
@@ -120,6 +121,9 @@ io.on('connection', (socket) => {
           { new: true } // Options: return the modified document after update
         );
 
+        const negotiation = await Negotiation.findById(room);
+        negotiationStatus = negotiation.status;
+
       });
   
       writeStream.on('error', (err) => {
@@ -132,8 +136,8 @@ io.on('connection', (socket) => {
       // Save the message to the database using the controller function
       // type 0: text, 1: file
       await saveMessage({ avatar: '', sender: senderId, text: message, room: room, type: fileData ? 1 : 0, file_name: fileName ? fileName : '' });
-      const latestMessage = await Message.findOne({ room: room }).sort({ createdAt: -1 }).populate('sender');
-
+      var latestMessage = await Message.findOne({ room: room }).sort({ createdAt: -1 }).populate('sender');
+      latestMessage.status = negotiationStatus;
       socket.to(room).emit('chat message', latestMessage);
 
     } catch (error) {
@@ -231,7 +235,7 @@ app.get("*", (req, res) => {
 // const httpsServer = https.createServer(credentials, app);
 
 httpServer.listen(port, () => {
-	console.log('HTTP Server running on port 8080');
+	console.log('HTTP Server running on port ', port);
 });
 
 // httpsServer.listen(443, () => {

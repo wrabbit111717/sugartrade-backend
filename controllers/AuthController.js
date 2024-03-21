@@ -134,7 +134,7 @@ exports.signup = async function (req, res, next) {
 };
 
 function sendVerificationEmail(email, verificationToken) {
-    // const verificationLink = `http://sugartrader.com.br/auth/verifyEmail/${token}`; // Update with your actual domain and endpoint
+    // const verificationLink = `http://sugartrade.com.br/auth/verifyEmail/${token}`; // Update with your actual domain and endpoint
     // const mailOptions = {
     //     from: 'twinklex2025@gmail.com',
     //     to: email,
@@ -152,10 +152,6 @@ function sendVerificationEmail(email, verificationToken) {
     // });
     const verificationLink = `${process.env.APP_URL_API}/auth/verifyemail/${verificationToken}`;
   
-    sgMail.send(msg)
-    .then(() => console.log('Email sent successfully'))
-    .catch((error) => console.error(error.message, 'Email send Error'));
-
     const msg = {
         to: email,
         from: 'bbhodan@rivio.io', // Use the email address you verified with SendGrid

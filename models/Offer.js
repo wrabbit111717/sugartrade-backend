@@ -17,7 +17,10 @@ const OfferSchema = new mongoose.Schema({
     category : String,
     email : String,
     content : String,
-    is_active: Boolean,
+    is_active: {
+        type: Boolean,
+        default: true, // Set the default value to true (or false if desired)
+    },
     user_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
