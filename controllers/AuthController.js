@@ -462,9 +462,9 @@ exports.signin = function (req, res, next) {
                     // Handle user not found error
                     res.status(401).json({ success: false, message: 'Invalid email.' });
                 } else {
-                    if(!user.isVerified) {
-                        res.status(401).json({ success: false, message: 'Email is not verified. Please check your email for the verification link.' });
-                    } else {
+                    // if(!user.isVerified) {
+                    //     res.status(401).json({ success: false, message: 'Email is not verified. Please check your email for the verification link.' });
+                    // } else {
                         if (password.length === 0) {
                             // Handle password validation error
                             res.status(400).json({ success: false, message: 'Password is required.' });
@@ -481,7 +481,7 @@ exports.signin = function (req, res, next) {
                                 res.status(200).json({ success: true, token });
                             }
                         }
-                    }
+                    // }
                 }
             }
         });
