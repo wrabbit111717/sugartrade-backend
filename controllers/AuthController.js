@@ -112,20 +112,23 @@ exports.signup = async function (req, res, next) {
         // Save the user to the database
         await newUser.save();
 
-        const verificationToken = crypto.randomBytes(20).toString('hex');
+        // const verificationToken = crypto.randomBytes(20).toString('hex');
         
-        // Update user model with verification token
-        newUser.verificationToken = verificationToken;
+        // // Update user model with verification token
+        // newUser.verificationToken = verificationToken;
 
         // Save the user to the database
         await newUser.save();
 
         console.log(newUser, 'newUser')
         // Send verification email
-        sendVerificationEmail(newUser.email, verificationToken);
+        // sendVerificationEmail(newUser.email, verificationToken);
 
         // Return a success response
-        return res.status(201).json({ message: 'User registered successfully. Check your email for verification.' });
+        const token = jwt.sign({ userId: newUser._id, email: email, name: name }, 'your-secret-key', { expiresIn: '1h' });
+    
+        // Send the token to the client (Next.js)
+        return res.status(200).json({ success: true, token });
 
     } catch (error) {
         console.error('Signup error:', error);
